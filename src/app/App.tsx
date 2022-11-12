@@ -10,9 +10,9 @@ export const App = () => {
         <div className={styles.app}>
 
             <Switch>
-                <Route exact path='/' render={() => <Redirect to={'/NewStories'}/>}/>
+                <Route exact path='/' render={() => <Redirect to={'/newStories'}/>}/>
                 <Route path='/newStories' render={() => <NewStories/>}/>
-                <Route path='/story/:storyID?' render={() => <StoryPage/>}/>
+                <Route path='/story/:storyID' render={() => <StoryPage/>}/>
                 <Route path='/error404' render={() => <Error404/>}/>
                 <Route render={() => <Redirect to={'/error404'}/>}/>
             </Switch>

@@ -20,15 +20,15 @@ export const appReducer = (state = initialState, action: AppActionType): Initial
     }
 }
 
-//actions
-export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
-export const setIsInitializedAC = (isInitialized: boolean) => ({type: 'APP/SET-IN-INITIALIZED', isInitialized} as const)
-export const setAppErrorAC = (error: string) => ({type: 'APP/SET-ERROR', error} as const)
+// Actions
+export const setAppStatus = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
+export const setIsInitialized = (isInitialized: boolean) => ({type: 'APP/SET-IN-INITIALIZED', isInitialized} as const)
+export const setAppError = (error: string) => ({type: 'APP/SET-ERROR', error} as const)
 
-// type
+// Types
 export type InitialAppStateType = typeof initialState
 export type RequestStatusType = 'idle' | 'loading'
 export type AppActionType =
-    | ReturnType<typeof setAppStatusAC>
-    | ReturnType<typeof setIsInitializedAC>
-    | ReturnType<typeof setAppErrorAC>
+    | ReturnType<typeof setAppStatus>
+    | ReturnType<typeof setIsInitialized>
+    | ReturnType<typeof setAppError>
