@@ -11,7 +11,7 @@ export const storyPageReducer = (state = initialState, action: StoryPageActionTy
     switch (action.type) {
         case 'STORY-PAGE/SET-STORY-DATA':
             return {...state, story: action.date}
-        case 'STORY-PAGE/SET-COMMENT-DATA':
+        case 'STORY-PAGE/SET-COMMENTS-DATA':
             return {...state, comments: action.date}
         default:
             return state
@@ -21,7 +21,7 @@ export const storyPageReducer = (state = initialState, action: StoryPageActionTy
 // Actions
 export const setStoryData = (date: StoryType | null) => ({type: 'STORY-PAGE/SET-STORY-DATA', date} as const)
 
-export const setCommentData = (date: CommentType[] | null) => ({type: 'STORY-PAGE/SET-COMMENT-DATA', date} as const)
+export const setCommentsData = (date: CommentType[] | null) => ({type: 'STORY-PAGE/SET-COMMENTS-DATA', date} as const)
 
 // Thunks
 export const setStory = (storyId: number): AppThunk => async (dispatch) => {
@@ -35,7 +35,7 @@ export const setStory = (storyId: number): AppThunk => async (dispatch) => {
                     const resStory = await hackerNewsAPI.getStory(el)
                     return resStory.data
                 }))
-            dispatch(setCommentData(resComment))
+            dispatch(setCommentsData(resComment))
         }
     } catch (e) {
         console.log('e')
@@ -49,4 +49,4 @@ export type InitialStoryPageStateType = typeof initialState
 
 export type StoryPageActionType =
     | ReturnType<typeof setStoryData>
-    | ReturnType<typeof setCommentData>
+    | ReturnType<typeof setCommentsData>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {useAppSelector} from '../../common/hooks/useAppSelector';
 import {useAppDispatch} from '../../common/hooks/useAppDispatch';
-import {setCommentData, setStory, setStoryData} from './storyPage-reducer';
+import {setCommentsData, setStory, setStoryData} from './storyPage-reducer';
 import {useTime} from '../../common/hooks/useTime';
 import {Comment} from './Comment/Comment';
 import {Preloader} from '../../common/components/Preloader/Preloader';
@@ -28,7 +28,7 @@ export const StoryPage = () => {
     useEffect( () => {
         return () => {
             dispatch(setStoryData(null))
-            dispatch(setCommentData(null))
+            dispatch(setCommentsData(null))
         }
     }, [])
 
