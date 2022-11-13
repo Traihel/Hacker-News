@@ -4,8 +4,6 @@ import {AppActionType, appReducer} from "../app/app-reducer"
 import {NewStoriesActionType, newStoriesReducer} from '../features/NewStories/newStories-reducer';
 import {StoryPageActionType, storyPageReducer} from '../features/StoryPage/storyPage-reducer';
 
-
-
 const rootReducer = combineReducers({
     app: appReducer,
     newStories: newStoriesReducer,
