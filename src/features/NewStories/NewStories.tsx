@@ -8,7 +8,6 @@ import {Preloader} from '../../common/components/Preloader/Preloader';
 export const NewStories = () => {
 
     const dispatch = useAppDispatch()
-    const isInitialized = useAppSelector(state => state.app.isInitialized)
     const stories = useAppSelector(state => state.newStories.stories)
 
     const [intervalId, setIntervalId] = useState<NodeJS.Timer>()
@@ -25,14 +24,14 @@ export const NewStories = () => {
         return () => clearInterval(interval)
     }, [update])
 
-    const onClickHandler = () => setUpdate(!update)
+    const onClickUpdateHandler = () => setUpdate(!update)
 
-    if (!isInitialized) {
+    if (!stories) {
         return <Preloader/>
     }
 
     return <div>
-        <button onClick={onClickHandler}>обновить</button>
+        <button onClick={onClickUpdateHandler}>обновить</button>
 
         {stories && stories.map((el, index) => {
             return <Story

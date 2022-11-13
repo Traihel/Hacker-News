@@ -1,10 +1,35 @@
 # Hacker News
 
-Hacker News is a social news site with a focus on computer science and entrepreneurship. In general, content that can be presented is defined as "anything that satisfies intellectual curiosity".
+[Hacker News](https://news.ycombinator.com/) is a social news site with a focus on computer science and
+entrepreneurship. In general, content that can be presented is defined as "anything that satisfies intellectual
+curiosity".
+
+---
+
+### Launch of the project
+
+Clone project:
+
+```
+$ git clone https://github.com/Traihel/Hacker-News.git
+```
+
+Install dependencies:
+
+```
+yarn
+```
+
+Launch the application:
+
+```
+yarn start
+```
 
 ---
 
 ### Technologies:
+
 - React
 - TypeScript
 - React-Redux
@@ -17,6 +42,7 @@ Hacker News is a social news site with a focus on computer science and entrepren
 ---
 
 ### GitHub commits
+
 type: description
 
 The types will be like this:

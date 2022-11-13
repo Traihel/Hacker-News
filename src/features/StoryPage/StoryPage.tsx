@@ -1,26 +1,58 @@
-import React, {useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useHistory, useParams} from 'react-router-dom';
 import {useAppSelector} from '../../common/hooks/useAppSelector';
+import {useAppDispatch} from '../../common/hooks/useAppDispatch';
+import {setCommentData, setStory, setStoryData} from './storyPage-reducer';
+import {useTime} from '../../common/hooks/useTime';
+import {Comment} from './Comment/Comment';
+import {Preloader} from '../../common/components/Preloader/Preloader';
 
 export const StoryPage = () => {
 
-    const {storyID} = useParams<{storyID: string}>()
+    const {storyID} = useParams<{ storyID: string }>()
+    const history = useHistory();
 
-    const stories = useAppSelector(state => state.newStories.stories)
+    const dispatch = useAppDispatch()
+    const story = useAppSelector(state => state.storyPage.story)
+    const comments = useAppSelector(state => state.storyPage.comments)
 
-    const story = stories ? stories.find(el => el.id === +storyID) : null
+    const finaleTime = useTime(story?.time as number)
 
-    useEffect(() =>{
-        if (!story) {
+    const [update, setUpdate] = useState<boolean>(false)
 
+    useEffect(() => {
+        dispatch(setStory(+storyID))
+
+    }, [update])
+
+    useEffect( () => {
+        return () => {
+            dispatch(setStoryData(null))
+            dispatch(setCommentData(null))
         }
-
     }, [])
 
-    console.log(story)
+    const onClickBackHandler = () => history.push('/newStories')
+
+    const onClickUpdateHandler = () => setUpdate(!update)
+
+    if (!comments) {
+        return <Preloader/>
+    }
 
     return <div>
-        {storyID} |
-        StoryPage
+        {comments &&
+        <div>
+            <button onClick={onClickBackHandler}>Назад</button>
+            <button onClick={onClickUpdateHandler}>обновить</button>
+            <div>{story?.url}</div>
+            <div>{story?.title}</div>
+            <div>{finaleTime}</div>
+            <div>{story?.by}</div>
+            <div>{story?.kids ? story?.kids.length : 0}</div>
+
+            {comments?.map(el => <Comment key={el.id} comment={el}/>)}
+        </div>
+        }
     </div>
 }

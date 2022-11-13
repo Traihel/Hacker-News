@@ -1,9 +1,9 @@
 import {AppThunk} from "../../store/store"
-import {hackerNewsAPI, RootStoryType} from '../../api/api';
-import {setAppStatus, setIsInitialized} from '../../app/app-reducer';
+import {hackerNewsAPI, StoryType} from '../../api/api';
+import {setAppStatus} from '../../app/app-reducer';
 
 const initialState = {
-    stories: null as RootStoryType[] | null,
+    stories: null as StoryType[] | null,
 }
 
 export const newStoriesReducer = (state = initialState, action: NewStoriesActionType): InitialNewStoriesStateType => {
@@ -16,7 +16,7 @@ export const newStoriesReducer = (state = initialState, action: NewStoriesAction
 }
 
 // Actions
-export const setStoriesData = (date: RootStoryType[]) => ({type: 'NEW-STORIES/SET-STORIES-DATA', date} as const)
+export const setStoriesData = (date: StoryType[]) => ({type: 'NEW-STORIES/SET-STORIES-DATA', date} as const)
 
 // Thunks
 export const setStories = (): AppThunk => async (dispatch) => {
@@ -32,7 +32,6 @@ export const setStories = (): AppThunk => async (dispatch) => {
     } catch (e) {
         console.log('e')
     } finally {
-        dispatch(setIsInitialized(true))
         dispatch(setAppStatus('idle'))
     }
 }
@@ -40,5 +39,4 @@ export const setStories = (): AppThunk => async (dispatch) => {
 // Types
 export type InitialNewStoriesStateType = typeof initialState
 
-export type NewStoriesActionType =
-    | ReturnType<typeof setStoriesData>
+export type NewStoriesActionType = ReturnType<typeof setStoriesData>
