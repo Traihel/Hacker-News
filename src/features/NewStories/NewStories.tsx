@@ -8,6 +8,7 @@ import {Preloader} from '../../common/components/Preloader/Preloader';
 export const NewStories = () => {
 
     const dispatch = useAppDispatch()
+    const isInitialized = useAppSelector(state => state.app.isInitialized)
     const stories = useAppSelector(state => state.newStories.stories)
 
     const [intervalId, setIntervalId] = useState<NodeJS.Timer>()
@@ -26,7 +27,7 @@ export const NewStories = () => {
 
     const onClickUpdateHandler = () => setUpdate(!update)
 
-    if (!stories) {
+    if (!isInitialized) {
         return <Preloader/>
     }
 

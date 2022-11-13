@@ -13,6 +13,7 @@ export const StoryPage = () => {
     const history = useHistory();
 
     const dispatch = useAppDispatch()
+    const isInitialized = useAppSelector(state => state.app.isInitialized)
     const story = useAppSelector(state => state.storyPage.story)
     const comments = useAppSelector(state => state.storyPage.comments)
 
@@ -25,7 +26,7 @@ export const StoryPage = () => {
 
     }, [update])
 
-    useEffect( () => {
+    useEffect(() => {
         return () => {
             dispatch(setStoryData(null))
             dispatch(setCommentsData(null))
@@ -36,23 +37,23 @@ export const StoryPage = () => {
 
     const onClickUpdateHandler = () => setUpdate(!update)
 
-    if (!comments) {
+    if (!isInitialized) {
         return <Preloader/>
     }
 
     return <div>
-        {comments &&
-        <div>
-            <button onClick={onClickBackHandler}>Назад</button>
-            <button onClick={onClickUpdateHandler}>обновить</button>
-            <div>{story?.url}</div>
-            <div>{story?.title}</div>
-            <div>{finaleTime}</div>
-            <div>{story?.by}</div>
-            <div>{story?.kids ? story?.kids.length : 0}</div>
+        <button onClick={onClickBackHandler}>Назад</button>
+        <button onClick={onClickUpdateHandler}>обновить</button>
+        {story &&
+            <div>
+                <div>{story?.url}</div>
+                <div>{story?.title}</div>
+                <div>{finaleTime}</div>
+                <div>{story?.by}</div>
+                <div>{story?.kids ? story?.kids.length : 0}</div>
 
-            {comments?.map(el => <Comment key={el.id} comment={el}/>)}
-        </div>
+                {comments?.map(el => <Comment key={el.id} comment={el}/>)}
+            </div>
         }
     </div>
 }

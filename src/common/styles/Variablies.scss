@@ -1,7 +1,19 @@
 $bgColor: #e44d3a;
 $bgSecond: #fff;
 $color: #b2b2b2;
-
+$error: #EB3941;
 $twoColor: #666666;
 $bgSecondButton: #52D791;
 $linksColor: #47A3F5;
+
+@mixin text($color, $fontSize) {
+  color: $color;
+  font-size: $fontSize;
+  line-height: 30px;
+
+  &:first-letter {
+    text-transform: uppercase;
+    font-size: $fontSize;
+    font-family: sans-serif;
+  }
+}

@@ -6,6 +6,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import {Error404} from '../common/components/Error404/Error404';
 import {LinearProgress} from '../common/components/LinearProgress/LinearProgress';
 import {useAppSelector} from '../common/hooks/useAppSelector';
+import {ErrorOutput} from '../common/components/ErrorOutput/ErrorOutput';
 
 export const App = () => {
 
@@ -21,7 +22,7 @@ export const App = () => {
                 <Route path='/error404' render={() => <Error404/>}/>
                 <Route render={() => <Redirect to={'/error404'}/>}/>
             </Switch>
-
+            <ErrorOutput/>
         </div>
     );
 }

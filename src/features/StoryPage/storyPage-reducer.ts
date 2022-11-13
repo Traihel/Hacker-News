@@ -1,6 +1,7 @@
-import {setAppStatus} from "../../app/app-reducer"
+import {setAppStatus, setIsInitialized} from "../../app/app-reducer"
 import {AppThunk} from "../../store/store"
 import {CommentType, hackerNewsAPI, StoryType} from '../../api/api';
+import {errorHandlerUtil} from '../../common/utils/errors-utils';
 
 const initialState = {
     story: null as StoryType | null,
@@ -38,8 +39,9 @@ export const setStory = (storyId: number): AppThunk => async (dispatch) => {
             dispatch(setCommentsData(resComment))
         }
     } catch (e) {
-        console.log('e')
+        errorHandlerUtil(e, dispatch)
     } finally {
+        dispatch(setIsInitialized(true))
         dispatch(setAppStatus('idle'))
     }
 }

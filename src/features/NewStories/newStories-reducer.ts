@@ -1,6 +1,7 @@
 import {AppThunk} from "../../store/store"
 import {hackerNewsAPI, StoryType} from '../../api/api';
-import {setAppStatus} from '../../app/app-reducer';
+import {setAppStatus, setIsInitialized} from '../../app/app-reducer';
+import {errorHandlerUtil} from '../../common/utils/errors-utils';
 
 const initialState = {
     stories: null as StoryType[] | null,
@@ -30,8 +31,9 @@ export const setStories = (): AppThunk => async (dispatch) => {
             }))
         dispatch(setStoriesData(res))
     } catch (e) {
-        console.log('e')
+        errorHandlerUtil(e, dispatch)
     } finally {
+        dispatch(setIsInitialized(true))
         dispatch(setAppStatus('idle'))
     }
 }
