@@ -4,7 +4,6 @@ import {useHistory, useParams} from 'react-router-dom';
 import {useAppSelector} from '../../common/hooks/useAppSelector';
 import {useAppDispatch} from '../../common/hooks/useAppDispatch';
 import {setCommentsData, setStory, setStoryData} from './storyPage-reducer';
-import {useTime} from '../../common/hooks/useTime';
 import {Comment} from './Comment/Comment';
 import {Preloader} from '../../common/components/Preloader/Preloader';
 import {Button} from '../../common/components/Button/Button';
@@ -20,8 +19,6 @@ export const StoryPage = () => {
     const status = useAppSelector(state => state.app.status)
     const story = useAppSelector(state => state.storyPage.story)
     const comments = useAppSelector(state => state.storyPage.comments)
-
-    const finaleTime = useTime(story?.time as number)
 
     const [update, setUpdate] = useState<boolean>(false)
 
@@ -62,7 +59,7 @@ export const StoryPage = () => {
                     url={story.url}
                 />
 
-                {comments?.map(el => <Comment key={el.id} comment={el}/>)}
+                {comments && comments.map(el => <Comment key={el.id} comment={el}/>)}
             </div>
         }
     </div>

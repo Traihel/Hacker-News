@@ -44,7 +44,7 @@ export const NewStories = () => {
         </header>
 
         <div>
-            {stories?.map((el, index) => {
+            {stories && stories.map((el, index) => {
 
                 const onClickStoryHandler = () => history.push(`/story/${el.id}`)
 
