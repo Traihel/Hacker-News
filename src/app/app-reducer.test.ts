@@ -24,5 +24,3 @@ test('set error', () => {
     const appReducerTest = appReducer(state, setAppError({message: 'Error messages'}))
     expect(appReducerTest.error?.message).toBe('Error messages')
 })
-
-
