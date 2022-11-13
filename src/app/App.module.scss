@@ -1,3 +1,14 @@
 .app {
+  position: relative;
+  margin: 30px auto 60px;
+  width: 800px;
 
+  @media (max-width: 840px) {
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  @media (max-width: 500px) {
+    padding: 0 10px;
+  }
 }

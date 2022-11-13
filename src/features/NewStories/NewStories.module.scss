@@ -1,0 +1,28 @@
+@import "../../common/styles/Variablies";
+
+.storiesComponent {
+
+  .storiesHeader {
+    @include flexStandard();
+    @include headerBox();
+
+    .title {
+      font-size: 32px;
+      font-weight: 600;
+
+      @media (max-width: 500px) {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+  .storyBox {
+    transition-duration: 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 5px 15px rgb(0 0 0 / 5%);
+    }
+  }
+}

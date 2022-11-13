@@ -1,0 +1,19 @@
+@import "../../common/styles/Variablies";
+
+.storyComponent {
+
+  .storyHeader {
+    @include flexStandard();
+    @include headerBox();
+  }
+
+  .infoBox {
+    @include borderBox($color);
+
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+      @include borderBottom();
+    }
+  }
+}

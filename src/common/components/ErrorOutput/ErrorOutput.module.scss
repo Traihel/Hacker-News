@@ -12,7 +12,9 @@
     padding: 10px 30px 10px 20px;
 
     .h3 {
-      @include text($bgSecond, 20px);
+      color: $color;
+      font-size: 20px;
+      line-height: 30px;
     }
 
     .cross {

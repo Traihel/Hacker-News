@@ -1,19 +1,44 @@
 $bgColor: #e44d3a;
-$bgSecond: #fff;
-$color: #b2b2b2;
+$bgSecond: #b2b2b2;
+$color: #fff;
 $error: #EB3941;
-$twoColor: #666666;
-$bgSecondButton: #52D791;
-$linksColor: #47A3F5;
+$bgButton: #47A3F5;
+$twoColor: #F2F2F2;
 
-@mixin text($color, $fontSize) {
+@mixin headerBox() {
+  height: 70px;
+  background-color: $bgColor;
+  padding: 0 20px;
   color: $color;
-  font-size: $fontSize;
-  line-height: 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+  margin-bottom: 50px;
 
-  &:first-letter {
-    text-transform: uppercase;
-    font-size: $fontSize;
-    font-family: sans-serif;
+  @media (max-width: 500px) {
+    padding: 10px 20px;
+    height: 120px;
   }
+}
+
+@mixin borderBox($bgColor) {
+  background-color: $bgColor;
+  border-left: 1px solid #e4e4e4;
+  border-right: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  border-radius: 5px;
+  box-shadow: 0 2px #e4e4e4;
+  margin: 20px 0;
+}
+
+@mixin borderBottom() {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 20px;
+  word-wrap: break-word;
+}
+
+@mixin flexStandard() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
