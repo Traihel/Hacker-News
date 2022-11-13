@@ -1,6 +1,6 @@
 import {AppThunk} from "../../store/store"
 import {hackerNewsAPI, RootStoryType} from '../../api/api';
-import {setIsInitialized} from '../../app/app-reducer';
+import {setAppStatus, setIsInitialized} from '../../app/app-reducer';
 
 const initialState = {
     stories: null as RootStoryType[] | null,
@@ -20,6 +20,7 @@ export const setStoriesData = (date: RootStoryType[]) => ({type: 'NEW-STORIES/SE
 
 // Thunks
 export const setStories = (): AppThunk => async (dispatch) => {
+    dispatch(setAppStatus('loading'))
     try {
         const resStories = (await hackerNewsAPI.getStories()).data.filter((el, index) => index < 100)
         const res = await Promise.all(
@@ -32,6 +33,7 @@ export const setStories = (): AppThunk => async (dispatch) => {
         console.log('e')
     } finally {
         dispatch(setIsInitialized(true))
+        dispatch(setAppStatus('idle'))
     }
 }
 
