@@ -1,5 +1,6 @@
-import {InitialNewStoriesStateType, newStoriesReducer, setStoriesData} from './newStories-reducer';
+import {InitialNewStoriesStateType, newStoriesReducer} from './newStories-reducer';
 import {StoryType} from '../../api/api';
+import {getStories} from './newStories-actions';
 
 let state: InitialNewStoriesStateType
 let newStories: StoryType[]
@@ -34,8 +35,9 @@ beforeEach(() => {
     ]
 })
 
-test('set stories data', () => {
-    const newStoriesReducerTest = newStoriesReducer(state, setStoriesData(newStories))
+test('get stories data', () => {
+    const action = getStories.fulfilled(newStories, 'requestId')
+    const newStoriesReducerTest = newStoriesReducer(state, action)
     expect(newStoriesReducerTest.stories).not.toBe(null)
     expect(newStoriesReducerTest.stories?.length).toBe(2)
 })

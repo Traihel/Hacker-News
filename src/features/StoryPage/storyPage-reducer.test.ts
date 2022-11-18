@@ -1,5 +1,6 @@
 import {CommentType, StoryType} from '../../api/api';
-import {InitialStoryPageStateType, setCommentsData, setStoryData, storyPageReducer} from './storyPage-reducer';
+import {InitialStoryPageStateType, storyPageReducer} from './storyPage-reducer';
+import {getComments, getStory} from './storyPage-actions';
 
 let state: InitialStoryPageStateType
 let newStory: StoryType
@@ -34,14 +35,16 @@ beforeEach(() => {
     ]
 })
 
-test('set story data', () => {
-    const storyPageReducerTest = storyPageReducer(state, setStoryData(newStory))
+test('get story data', () => {
+    const action = getStory.fulfilled(newStory, 'requestId', {storyId: 123})
+    const storyPageReducerTest = storyPageReducer(state, action)
     expect(storyPageReducerTest.story).not.toBe(null)
     expect(storyPageReducerTest.story?.by).toBe('Vladimir')
 })
 
-test('set comments data', () => {
-    const storyPageReducerTest = storyPageReducer(state, setCommentsData(newComments))
+test('get comments data', () => {
+    const action = getComments.fulfilled(newComments, 'requestId', {kidsId: [123]})
+    const storyPageReducerTest = storyPageReducer(state, action)
     expect(storyPageReducerTest.comments).not.toBe(null)
     expect(storyPageReducerTest.comments?.length).toBe(1)
 })

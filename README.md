@@ -35,8 +35,7 @@ yarn start
 - React
 - TypeScript
 - React-Redux
-- Redux
-- Redux-Thunk
+- Redux-Toolkit
 - React-Router-Dom
 - Axios
 - SASS

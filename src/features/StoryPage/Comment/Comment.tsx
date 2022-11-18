@@ -20,14 +20,14 @@ export const Comment = ({comment}: CommentPropsType) => {
     useEffect(() => {
         (async () => {
             if (comment.kids && update) {
-                dispatch(setAppStatus('loading'))
+                dispatch(setAppStatus({status: 'loading'}))
                 const resComment = await Promise.all(
                     comment.kids.map(async (el) => {
                         const resStory = await hackerNewsAPI.getStory(el)
                         return resStory.data
                     }))
                 srtValue(resComment)
-                dispatch(setAppStatus('idle'))
+                dispatch(setAppStatus({status: 'idle'}))
             }
         })()
         return () => {

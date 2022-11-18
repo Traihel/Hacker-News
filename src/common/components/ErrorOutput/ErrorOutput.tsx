@@ -13,22 +13,22 @@ export const ErrorOutput = () => {
     const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>()
 
     const onClickHandler = () => {
-        dispatch(setAppError(null))
+        dispatch(setAppError({message: ''}))
         clearTimeout(timeoutId)
     }
 
     useEffect(() => {
         clearTimeout(timeoutId)
-        if (error) {
+        if (error.message) {
             const timeoutId = setTimeout(() => {
-                dispatch(setAppError(null))
+                dispatch(setAppError({message: ''}))
             }, 7000)
             setTimeoutId(timeoutId)
         }
     }, [error])
 
     return <div className={styles.ErrorOutputComponent}>
-        {error &&
+        {error.message &&
             <div className={styles.error}>
                 <div className={styles.h3}>
                     {error.message}

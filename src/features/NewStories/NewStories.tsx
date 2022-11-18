@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import styles from './NewStories.module.scss';
 import {Story} from '../../common/components/Story/Story';
-import {setStories} from './newStories-reducer';
 import {useAppDispatch} from '../../common/hooks/useAppDispatch';
 import {useAppSelector} from '../../common/hooks/useAppSelector';
 import {Preloader} from '../../common/components/Preloader/Preloader';
 import {Button} from '../../common/components/Button/Button';
 import {useHistory} from 'react-router-dom';
+import {getStories} from './newStories-actions';
 
 export const NewStories = () => {
 
@@ -20,10 +20,10 @@ export const NewStories = () => {
     const [update, setUpdate] = useState<boolean>(false)
 
     useEffect(() => {
-        dispatch(setStories())
+        dispatch(getStories())
         clearInterval(intervalId)
         const interval = setInterval(() => {
-            dispatch(setStories())
+            dispatch(getStories())
         }, 60000)
         setIntervalId(interval)
 

@@ -1,8 +1,7 @@
-import {applyMiddleware, combineReducers, legacy_createStore } from "redux"
-import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk"
-import {AppActionType, appReducer} from "../app/app-reducer"
-import {NewStoriesActionType, newStoriesReducer} from '../features/NewStories/newStories-reducer';
-import {StoryPageActionType, storyPageReducer} from '../features/StoryPage/storyPage-reducer';
+import {appReducer} from "../app/app-reducer"
+import {newStoriesReducer} from '../features/NewStories/newStories-reducer';
+import {storyPageReducer} from '../features/StoryPage/storyPage-reducer';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
     app: appReducer,
@@ -10,13 +9,9 @@ const rootReducer = combineReducers({
     storyPage: storyPageReducer
 })
 
-export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
+export const store = configureStore({reducer: rootReducer})
 
 // Types
-export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppRootStateType = ReturnType<typeof store.getState>
 
-export type AppRootActionsType = AppActionType | NewStoriesActionType | StoryPageActionType
-
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppRootActionsType>
-
-export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>
+export type AppDispatch = typeof store.dispatch

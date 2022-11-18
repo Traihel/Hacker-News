@@ -3,11 +3,12 @@ import styles from './StoryPage.module.scss';
 import {useHistory, useParams} from 'react-router-dom';
 import {useAppSelector} from '../../common/hooks/useAppSelector';
 import {useAppDispatch} from '../../common/hooks/useAppDispatch';
-import {setCommentsData, setStory, setStoryData} from './storyPage-reducer';
+import {setCommentsNull, setStoryNull} from './storyPage-reducer';
 import {Comment} from './Comment/Comment';
 import {Preloader} from '../../common/components/Preloader/Preloader';
 import {Button} from '../../common/components/Button/Button';
 import {Story} from '../../common/components/Story/Story';
+import {getStory} from './storyPage-actions';
 
 export const StoryPage = () => {
 
@@ -23,14 +24,13 @@ export const StoryPage = () => {
     const [update, setUpdate] = useState<boolean>(false)
 
     useEffect(() => {
-        dispatch(setStory(+storyID))
-
+        dispatch(getStory({storyId: +storyID}))
     }, [update])
 
     useEffect(() => {
         return () => {
-            dispatch(setStoryData(null))
-            dispatch(setCommentsData(null))
+            dispatch(setStoryNull())
+            dispatch(setCommentsNull())
         }
     }, [])
 
