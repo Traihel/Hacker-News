@@ -1,6 +1,6 @@
 import {setAppStatus, setIsInitialized} from "../../app/app-reducer"
 import {AppThunk} from "../../store/store"
-import {CommentType, hackerNewsAPI, StoryType} from '../../api/api';
+import {hackerNewsAPI, CommentType, StoryType} from '../../api/api';
 import {errorHandlerUtil} from '../../common/utils/errors-utils';
 
 const initialState = {
@@ -31,11 +31,11 @@ export const setStory = (storyId: number): AppThunk => async (dispatch) => {
         const resStory = await hackerNewsAPI.getStory(storyId)
         dispatch(setStoryData(resStory.data))
         if (resStory.data.kids) {
-            const resComment = await Promise.all(
+            const resComment = (await Promise.all(
                 resStory.data.kids.map(async (el) => {
                     const resStory = await hackerNewsAPI.getStory(el)
                     return resStory.data
-                }))
+                }))).filter(el => el !== null)
             dispatch(setCommentsData(resComment))
         }
     } catch (e) {

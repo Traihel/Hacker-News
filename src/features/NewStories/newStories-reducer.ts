@@ -24,11 +24,11 @@ export const setStories = (): AppThunk => async (dispatch) => {
     dispatch(setAppStatus('loading'))
     try {
         const resStories = (await hackerNewsAPI.getStories()).data.filter((el, index) => index < 100)
-        const res = await Promise.all(
+        const res = (await Promise.all(
             resStories.map(async (el) => {
                 const resStory = await hackerNewsAPI.getStory(el)
                 return resStory.data
-            }))
+            }))).filter(el => el !== null)
         dispatch(setStoriesData(res))
     } catch (e) {
         errorHandlerUtil(e, dispatch)

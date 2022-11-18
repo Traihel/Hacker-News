@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Comment.module.scss';
 import {CommentType, hackerNewsAPI} from '../../../api/api';
 import {setAppStatus} from '../../../app/app-reducer';
@@ -15,12 +15,11 @@ export const Comment = ({comment}: CommentPropsType) => {
     const dispatch = useAppDispatch()
 
     const [value, srtValue] = useState<CommentType[] | null>(null)
+    const [update, setUpdate] = useState<boolean>(false)
 
-    const onClickCommentHandler = async () => {
-        if (value) {
-            srtValue(null)
-        } else {
-            if (comment.kids) {
+    useEffect(() => {
+        (async () => {
+            if (comment.kids && update) {
                 dispatch(setAppStatus('loading'))
                 const resComment = await Promise.all(
                     comment.kids.map(async (el) => {
@@ -30,8 +29,13 @@ export const Comment = ({comment}: CommentPropsType) => {
                 srtValue(resComment)
                 dispatch(setAppStatus('idle'))
             }
+        })()
+        return () => {
+            srtValue(null)
         }
-    }
+    }, [update])
+
+    const onClickCommentHandler = async () => setUpdate(!update)
 
     const finaleTime = useTime(comment.time)
 
