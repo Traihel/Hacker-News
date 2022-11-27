@@ -1,6 +1,6 @@
 # Hacker News
 
-gh-pages - https://Traihel.github.io/Hacker-News
+gh-pages - https://Traigel.github.io/Hacker-News
 
 Hacker News is a social news site with a focus on computer science and
 entrepreneurship. In general, content that can be presented is defined as "anything that satisfies intellectual
